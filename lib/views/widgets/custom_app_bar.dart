@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_notes_app/views/notes_view.dart';
 import 'package:local_notes_app/views/widgets/custom_search_icon.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -7,7 +6,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
         Text(
           'Notes',

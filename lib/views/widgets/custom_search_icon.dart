@@ -12,7 +12,7 @@ class CustomSearchIcon extends StatelessWidget {
         ),
         child: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.search),
+          icon: const Icon(Icons.search),
         ));
   }
 }
