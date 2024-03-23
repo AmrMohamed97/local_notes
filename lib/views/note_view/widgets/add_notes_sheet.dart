@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:local_notes_app/core/widgets/custom_general_button.dart';
 import 'package:local_notes_app/core/widgets/custom_text_field.dart';
-import 'package:local_notes_app/views/note_view/widgets/custom_app_bar.dart';
 
-class EditNoteViewBody extends StatelessWidget {
-  const EditNoteViewBody({super.key});
+class AddNoteBottemSheet extends StatelessWidget {
+  const AddNoteBottemSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.0),
-      child: AddNoteForm(),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: SingleChildScrollView(child: AddNotesForm()),
     );
   }
 }
 
-class AddNoteForm extends StatelessWidget {
-  AddNoteForm({super.key});
+class AddNotesForm extends StatefulWidget {
+  const AddNotesForm({super.key});
+  @override
+  State<AddNotesForm> createState() => _AddNotesFormState();
+}
+
+class _AddNotesFormState extends State<AddNotesForm> {
+  GlobalKey<FormState> formKey = GlobalKey();
   String? title, subTitle;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKey = GlobalKey();
-    AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: Column(children: [
-        const SafeArea(child: SizedBox(height: 10)),
-        const CustomAppBar(
-          icon: Icons.check,
-          title: 'Edit Note',
-        ),
         const SizedBox(
           height: 40,
         ),
@@ -52,17 +52,33 @@ class AddNoteForm extends StatelessWidget {
         ),
         CustomTextField(
           onSaved: (value) {
-            subTitle = value;
+            title = value;
           },
           validator: (value) {
             if (value?.isEmpty ?? true) {
-              return 'subTitle must not be empty';
+              return 'title must not be empty';
             }
             return null;
           },
           hintText: 'content',
           textInputType: TextInputType.text,
           maxLines: 5,
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 60.0, bottom: 8),
+          child: CustomGeneralButton(
+            label: 'Add',
+            color: Color(0xff5ADBC9),
+            radius: 10,
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+              } else {
+                autovalidateMode = AutovalidateMode.always;
+                setState(() {});
+              }
+            },
+          ),
         ),
       ]),
     );
