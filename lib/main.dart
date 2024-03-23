@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_notes_app/views/notes_view.dart';
-
+//amr
 void main() {
   runApp(const MyApp());
 }
