@@ -7,4 +7,16 @@ class MyObserver extends BlocObserver {
     super.onChange(bloc, change);
     debugPrint('change : $change');
   }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    debugPrint('change : $transition');
+    super.onTransition(bloc, transition);
+  }
+
+  @override
+  void onClose(BlocBase bloc) {
+    debugPrint('change : $bloc');
+    super.onClose(bloc);
+  }
 }
