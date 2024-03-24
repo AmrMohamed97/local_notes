@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_notes_app/core/models/note_model.dart';
 import 'package:local_notes_app/core/widgets/custom_general_button.dart';
 import 'package:local_notes_app/core/widgets/custom_text_field.dart';
+import 'package:local_notes_app/manager/add_note_cubit.dart';
+import 'package:local_notes_app/manager/add_note_state.dart';
 
 class AddNotesForm extends StatefulWidget {
   const AddNotesForm({super.key});
@@ -53,6 +56,9 @@ class _AddNotesFormState extends State<AddNotesForm> {
           textInputType: TextInputType.text,
           maxLines: 5,
         ),
+        // BlocBuilder<AddNoteCubit, AddNoteState>(
+        // builder: (context, state) {
+        // return
         Padding(
           padding: const EdgeInsets.only(top: 60.0, bottom: 8),
           child: CustomGeneralButton(
@@ -62,12 +68,14 @@ class _AddNotesFormState extends State<AddNotesForm> {
             onTap: () async {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-                NoteModel pNote = NoteModel(
-                  color: Colors.blue.value,
+
+                NoteModel myNote = NoteModel(
                   title: title!,
                   subTitle: subTitle!,
+                  color: Colors.blue.value,
                   date: DateTime.now().toString(),
                 );
+                BlocProvider.of<AddNoteCubit>(context).addNote(myNote);
               } else {
                 autovalidateMode = AutovalidateMode.always;
                 setState(() {});
@@ -75,6 +83,9 @@ class _AddNotesFormState extends State<AddNotesForm> {
             },
           ),
         ),
+        // ;
+        //   },
+        // ),
       ]),
     );
   }
