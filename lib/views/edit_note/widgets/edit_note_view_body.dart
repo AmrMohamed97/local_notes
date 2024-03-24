@@ -8,7 +8,7 @@ class EditNoteViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: AddNoteForm(),
     );
   }
