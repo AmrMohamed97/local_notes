@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:local_notes_app/core/models/note_model.dart';
@@ -10,5 +12,6 @@ class ViewNoteCubit extends Cubit<ViewNoteState> {
   void viewNote() {
     var notes = Hive.box<NoteModel>(kNotesBox);
     allNotes = notes.values.toList();
+    emit(ViewNoteSuccessState());
   }
 }

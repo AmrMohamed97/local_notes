@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:local_notes_app/manager/view_note_cubit.dart';
 import 'package:local_notes_app/views/note_view/manager/add_note_cubit.dart';
 import 'package:local_notes_app/views/note_view/manager/add_note_state.dart';
 import 'package:local_notes_app/views/note_view/widgets/add_notes_form.dart';
@@ -16,6 +17,7 @@ class AddNoteBottemSheet extends StatelessWidget {
         listener: (context, state) {
           if (state is AddNoteLoadingState) {
           } else if (state is AddNoteSuccessState) {
+            BlocProvider.of<ViewNoteCubit>(context).viewNote();
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text(
                 'Note add success',
@@ -24,6 +26,7 @@ class AddNoteBottemSheet extends StatelessWidget {
               ),
               backgroundColor: Colors.green,
             ));
+
             Navigator.of(context).pop();
           } else if (state is AddNoteErrorState) {
             showDialog(
