@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:local_notes_app/core/models/note_model.dart';
 import 'package:local_notes_app/core/widgets/custom_general_button.dart';
 import 'package:local_notes_app/core/widgets/custom_text_field.dart';
-import 'package:local_notes_app/manager/add_note_controller.dart';
 
 class AddNotesForm extends StatefulWidget {
   const AddNotesForm({super.key});
@@ -15,7 +13,6 @@ class _AddNotesFormState extends State<AddNotesForm> {
   GlobalKey<FormState> formKey = GlobalKey();
   String? title, subTitle;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  AddNoteController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -65,13 +62,12 @@ class _AddNotesFormState extends State<AddNotesForm> {
             onTap: () async {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-                NoteModel note = NoteModel(
+                NoteModel pNote = NoteModel(
                   color: Colors.blue.value,
                   title: title!,
                   subTitle: subTitle!,
                   date: DateTime.now().toString(),
                 );
-                await controller.addNote(note);
               } else {
                 autovalidateMode = AutovalidateMode.always;
                 setState(() {});
