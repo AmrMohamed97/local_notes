@@ -26,8 +26,9 @@ class AddNoteBottemSheet extends StatelessWidget {
               ),
               backgroundColor: Colors.green,
             ));
-
             Navigator.of(context).pop();
+            BlocProvider.of<AddNoteCubit>(context).color = null;
+            BlocProvider.of<AddNoteCubit>(context).pressed = -1;
           } else if (state is AddNoteErrorState) {
             showDialog(
                 context: context,
@@ -46,6 +47,7 @@ class AddNoteBottemSheet extends StatelessWidget {
                             state.error.toString(),
                             style: const TextStyle(color: Colors.black),
                           ),
+                          
                           const SizedBox(
                             height: 30,
                           ),
@@ -80,3 +82,4 @@ class AddNoteBottemSheet extends StatelessWidget {
     );
   }
 }
+

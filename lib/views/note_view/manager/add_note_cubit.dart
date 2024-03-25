@@ -6,6 +6,16 @@ import 'package:local_notes_app/views/note_view/manager/add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
   AddNoteCubit() : super(AddNoteInitialState());
+  int? color;
+  int pressed = -1;
+  void assignColor(int index) {
+    color = index;
+    emit(ColorAssignedState());
+  }
+  void select(int index) {
+    pressed = index;
+    emit(ChangeColorSelectState());
+  }
   Future<void> addNote(NoteModel note) async {
     emit(AddNoteLoadingState());
     try {
